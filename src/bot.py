@@ -1,6 +1,7 @@
 from aiogram import Bot, Dispatcher, Router
-from aiogram.enums import ParseMode
 from aiogram.types import WebhookInfo, BotCommand
+from aiogram.enums import ParseMode
+from aiogram.client.default import DefaultBotProperties
 from loguru import logger
 
 from src.system import first_run
@@ -8,13 +9,14 @@ from src.config import get_config
 
 cfg = get_config()
 
-dp = Dispatcher()
-
 telegram_router = Router(name="telegram")
+
+dp = Dispatcher()
 
 dp.include_router(telegram_router)
 
-bot = Bot(token=cfg.bot_token, parse_mode = ParseMode.HTML)
+
+bot = Bot(token=cfg.bot_token)
 
 
 async def set_webhook(my_bot: Bot) -> None:
@@ -27,7 +29,7 @@ async def set_webhook(my_bot: Bot) -> None:
             return
     
     current_webhook_info = await check_webhook()
-    if cfg.debug():
+    if cfg.debug:
         logger.debug(f"Current webhook info - {current_webhook_info}")
     try:
         await my_bot.set_webhook(
@@ -58,4 +60,6 @@ async def start_telegram():
         logger.debug(f"First run{fr}")
     if fr:  
         await set_webhook(bot)
+        logger.debug("webhook setted")
         await set_bot_commands_menu(bot)
+        logger.debug("commands setted")

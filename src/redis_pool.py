@@ -1,6 +1,6 @@
 from redis.asyncio.connection import ConnectionPool
 
-from config import get_config
+from .config import get_config
 
 cfg = get_config()
 

@@ -1,6 +1,6 @@
 from os import getppid
 import redis.asyncio as aredis
-from config import get_config
+from .config import get_config
 
 
 cfg = get_config()

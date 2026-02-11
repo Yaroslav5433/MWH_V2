@@ -1,12 +1,14 @@
 from fastapi import FastAPI
 from contextlib import asynccontextmanager
 from loguru import logger
-from routes import root_router
+
+import src.handlers
+from .routes import root_router
+from .bot import start_telegram
 
 @asynccontextmanager
 async def lifespan(application: FastAPI):
     logger.info("Starting Application")
-    from bot import start_telegram
     await start_telegram()
     yield
     logger.info("Stopping Application")
