@@ -2,16 +2,16 @@ from typing import final
 
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
+from dotenv import load_dotenv
+
 from functools import lru_cache
 
+load_dotenv("dev.env")
+load_dotenv("prod.env", override=True)
 
 
 @final
 class Global_config(BaseSettings):
-    model_config = SettingsConfigDict(
-        env_file=('prod.env', 'dev.env'),
-        env_file_encoding='utf-8'
-    )
 
     debug: bool
     redis_url: str
@@ -19,6 +19,10 @@ class Global_config(BaseSettings):
     base_webhook_url: str
     webhook_path: str 
     telegram_my_token: str 
+
+    model_config = SettingsConfigDict(
+        env_file=None
+    )
     
 
 @lru_cache()
