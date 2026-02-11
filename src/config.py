@@ -14,11 +14,11 @@ class Global_config(BaseSettings):
     )
 
     debug: bool = True
-    redis_url: str = 'redis://localhost:6379/0'
-    bot_token: str = '7852065328:AAFNPKUvuZ0TswVrrdpf3zIKWoTRadjgHis'
-    base_webhook_url: str = 'https://hydrogeologic-unelegant-finnegan.ngrok-free.dev'
-    webhook_path: str = '/telegram/webhook'
-    telegram_my_token: str = '3u487u38asdbf012ndmc9f'
+    redis_url: str
+    bot_token: str
+    base_webhook_url: str
+    webhook_path: str
+    telegram_my_token: str
     
 
 @lru_cache()
