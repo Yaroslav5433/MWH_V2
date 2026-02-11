@@ -1,5 +1,5 @@
 from aiogram import Bot, Dispatcher, Router
-from aiogram.types import WebhookInfo, BotCommand
+from aiogram.types import WebhookInfo, BotCommand, ReplyKeyboardMarkup, KeyboardButton
 from aiogram.enums import ParseMode
 from aiogram.client.default import DefaultBotProperties
 from loguru import logger
@@ -44,16 +44,6 @@ async def set_webhook(my_bot: Bot) -> None:
         logger.error(f"Can`t set webhook - {e}")
 
 
-async def set_bot_commands_menu(my_bot: Bot) -> None:
-    commands = [
-        BotCommand(command="/id", description="Get my id"),
-    ]
-    try:
-        await my_bot.set_my_commands(commands)
-    except Exception as e:
-        logger.error(f"Can`t set a commands - {e}")
-
-
 async def start_telegram():
     fr = await first_run()
     if cfg.debug:
@@ -61,5 +51,3 @@ async def start_telegram():
     if fr:  
         await set_webhook(bot)
         logger.debug("webhook setted")
-        await set_bot_commands_menu(bot)
-        logger.debug("commands setted")

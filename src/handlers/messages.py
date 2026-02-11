@@ -1,37 +1,34 @@
 from loguru import logger
 from aiogram import types
 from aiogram import F
-from aiogram.filters import CommandStart, Command
 from aiogram.utils.markdown import bold
-from aiogram.types import Message
-from aiogram.enums import ParseMode
 
+from src.handlers import keyboards
 from src.bot import telegram_router
 
 
-@telegram_router.message(Command("id"))
-async def cmd_id(message: Message) -> None:
-    await message.answer(f"Your ID: {message.from_user.id}",)
+@telegram_router.message(F.text == "Interaction with my working hours")
+async def crud_hours(message: types.Message) -> None:
+    await message.answer(
+        "Choose what you want to do with your hours:",
+        reply_markup=keyboards.hours_interaction_keyboard
+    )
 
 
-@telegram_router.message(CommandStart())
-async def cmd_start(message: Message) -> None:
-    await message.answer(f"Hello, {bold(message.from_user.full_name)}!", parse_mode=ParseMode.MARKDOWN)
+@telegram_router.message(F.text == "Choose a desirable day's off for a next week")
+async def sent_desirable_day_off(message: types.Message) -> None:
+    pass
 
 
-@telegram_router.message(F.text == "echo")
-async def echo(message: types.Message) -> None:
-    try:
-        await message.send_copy(chat_id=message.chat.id)
-    except Exception as e:
-        logger.error(f"Can't send message - {e}")
-        await message.answer("Nice try!")
+@telegram_router.message(F.text == "Sent an anonymous message to a manager")
+async def sent_anonymous_message(message: types.Message) -> None:
+    pass
 
 
-@telegram_router.message(F.text == "ping")
-async def hello(message: types.Message) -> None:
-    try:
-        await message.answer("pong")
-    except Exception as e:
-        logger.error(f"Can't send message - {e}")
-        await message.answer("Nice try!")
+@telegram_router.message(F.text == "More information about bot")
+async def sent_info_about_bot(message: types.Message) -> None:
+    await message.answer(
+        "Here would be an info with all functions",
+        reply_markup=keyboards.start_keyboard_without_info
+    )
+
