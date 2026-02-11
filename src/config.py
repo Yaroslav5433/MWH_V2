@@ -13,7 +13,7 @@ class Global_config(BaseSettings):
         env_file_encoding='utf-8'
     )
 
-    debug: bool = True
+    debug: bool
     redis_url: str
     bot_token: str
     base_webhook_url: str
