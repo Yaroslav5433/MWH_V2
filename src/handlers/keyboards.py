@@ -4,7 +4,7 @@ from aiogram.types import ReplyKeyboardMarkup, KeyboardButton
 start_keyboard = ReplyKeyboardMarkup(
     keyboard = [
     [KeyboardButton(text="Interaction with my working hours")],
-    [KeyboardButton(text="Choose a desirable day's off for a next week")],
+    [KeyboardButton(text="Sent a request for a day's off for a next week")],
     [KeyboardButton(text="Sent an anonymous message to a manager")],
     [KeyboardButton(text="More information about bot")]
     ],
