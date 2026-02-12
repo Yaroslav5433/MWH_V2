@@ -1,2 +1,2 @@
-core.dev.env
-core.db.env
+*dev.env
+*db.env
