@@ -2,9 +2,9 @@ from fastapi import FastAPI
 from contextlib import asynccontextmanager
 from loguru import logger
 
-import src.handlers
+import src.tg_bot.handlers
 from .routes import root_router
-from .bot import start_telegram
+from .tg_bot.bot import start_telegram
 
 @asynccontextmanager
 async def lifespan(application: FastAPI):
