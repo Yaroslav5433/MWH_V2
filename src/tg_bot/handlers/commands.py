@@ -4,9 +4,9 @@ from aiogram.utils.markdown import bold
 from aiogram.types import Message
 from aiogram.enums import ParseMode
 
-from src.tg_bot.handlers import keyboards
-from src.tg_bot.bot import telegram_router
-from src.database.orm import create_user
+from ..handlers import keyboards
+from ..bot import telegram_router
+from src.database.orm_requests import create_user
 
 
 @telegram_router.message(CommandStart())
