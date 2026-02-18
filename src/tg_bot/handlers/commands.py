@@ -6,7 +6,7 @@ from aiogram.enums import ParseMode
 
 from ..handlers import keyboards
 from ..bot import telegram_router
-from src.database.orm_requests import create_user
+from src.database.orm_requests import create_user, check_user_existence
 
 
 @telegram_router.message(CommandStart())
@@ -18,9 +18,11 @@ If you're reading this - you're now part of our big family
 To proceed further - choose one of the active functions below:""",
     reply_markup=keyboards.start_keyboard,
     parse_mode=ParseMode.MARKDOWN)
-
-    await create_user(
+    
+    if not await check_user_existence(message.from_user.id):
+        logger.info("User is new, inserting info into db")
+        await create_user(
         tg_username = message.from_user.username,
         tg_user_id = message.from_user.id
     )
-    
+    logger.info("User already exist")
