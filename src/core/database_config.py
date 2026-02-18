@@ -1,8 +1,10 @@
 from functools import lru_cache
-from sqlalchemy import create_engine
 from pydantic_settings import BaseSettings, SettingsConfigDict
+from pathlib import Path
 
 from typing import final
+
+BASE_DIR = Path(__file__).resolve().parent
 
 
 @final
@@ -18,7 +20,7 @@ class DB_Config(BaseSettings):
         return f"postgresql+asyncpg://{self.DB_USER}:{self.DB_PASS}@{self.DB_HOST}:{self.DB_PORT}/{self.DB_NAME}"
 
     model_config = SettingsConfigDict(
-        env_file="db.env",
+        env_file= BASE_DIR / "db.env"
     )
 
 db_config = DB_Config()
