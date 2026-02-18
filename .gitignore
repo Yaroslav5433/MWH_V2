@@ -1,1 +1,2 @@
-.dev.env
+*dev.env
+*db.env
