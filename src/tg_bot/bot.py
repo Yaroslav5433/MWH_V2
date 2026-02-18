@@ -4,8 +4,8 @@ from aiogram.enums import ParseMode
 from aiogram.client.default import DefaultBotProperties
 from loguru import logger
 
-from src.system import first_run
-from src.config import get_config
+from src.core.system import first_run
+from src.core.config import get_config
 
 cfg = get_config()
 
