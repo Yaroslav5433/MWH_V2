@@ -20,7 +20,7 @@ class DB_Config(BaseSettings):
         return f"postgresql+asyncpg://{self.DB_USER}:{self.DB_PASS}@{self.DB_HOST}:{self.DB_PORT}/{self.DB_NAME}"
 
     model_config = SettingsConfigDict(
-        env_file= BASE_DIR / "db.env"
+        env_file = BASE_DIR / "db.env"
     )
 
 db_config = DB_Config()

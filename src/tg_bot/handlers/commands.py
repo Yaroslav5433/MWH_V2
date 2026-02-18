@@ -6,6 +6,7 @@ from aiogram.enums import ParseMode
 
 from src.tg_bot.handlers import keyboards
 from src.tg_bot.bot import telegram_router
+from src.database.orm import create_user
 
 
 @telegram_router.message(CommandStart())
@@ -17,3 +18,9 @@ If you're reading this - you're now part of our big family
 To proceed further - choose one of the active functions below:""",
     reply_markup=keyboards.start_keyboard,
     parse_mode=ParseMode.MARKDOWN)
+
+    await create_user(
+        tg_username = message.from_user.username,
+        tg_user_id = message.from_user.id
+    )
+    

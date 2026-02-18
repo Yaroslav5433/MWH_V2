@@ -1,8 +1,11 @@
 from typing import final
-
+from pathlib import Path
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 from functools import lru_cache
+
+
+BASE_DIR = Path(__file__).resolve().parent
 
 
 @final
@@ -16,7 +19,7 @@ class Global_config(BaseSettings):
     telegram_my_token: str 
 
     model_config = SettingsConfigDict(
-        env_file="dev.env"
+        env_file= BASE_DIR / "dev.env"
     )
     
 
